@@ -9,4 +9,5 @@ module com.ou.clinicmanagement {
     opens com.ou.clinicmanagement to javafx.fxml;
     opens com.ou.clinicmanagement.controllers to javafx.fxml;
     exports com.ou.clinicmanagement;
+    exports com.ou.pojos;
 }

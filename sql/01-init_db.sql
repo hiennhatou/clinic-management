@@ -21,7 +21,8 @@ CREATE TABLE users
     middle_name nvarchar(100)                                     NOT NULL,
     username    varchar(80)                                       NOT NULL UNIQUE,
     role        enum ('ADMIN', 'DOCTOR', 'PHARMACIST', 'PATIENT') NOT NULL,
-    password    nvarchar(255)                                     NOT NULL
+    password    nvarchar(255)                                     NOT NULL,
+    salt        nvarchar(255)                                     NOT NULL
 );
 
 CREATE TABLE patients
@@ -34,7 +35,8 @@ CREATE TABLE patients
 
 CREATE INDEX index_1 ON patients (id, id_code);
 
-CREATE TABLE allergic_ingredients(
+CREATE TABLE allergic_ingredients
+(
     id            bigint auto_increment NOT NULL PRIMARY KEY,
     patient_id    bigint                NOT NULL,
     ingredient_id bigint                NOT NULL
