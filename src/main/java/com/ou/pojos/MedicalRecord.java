@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MedicalRecords {
+public class MedicalRecord {
 
   private long id;
   private long patientId;

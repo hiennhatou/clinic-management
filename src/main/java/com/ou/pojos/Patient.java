@@ -9,7 +9,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ingredients {
+public class Patient {
+
   private long id;
-  private String name;
+  private java.sql.Date birthday;
+  private long idCode;
+  private String countryside;
+
 }

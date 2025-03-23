@@ -5,9 +5,9 @@ module com.ou.clinicmanagement {
     requires java.sql;
     requires mysql.connector.j;
 
-
     opens com.ou.clinicmanagement to javafx.fxml;
-    opens com.ou.clinicmanagement.controllers to javafx.fxml;
     exports com.ou.clinicmanagement;
     exports com.ou.pojos;
+    exports com.ou.services;
+    exports com.ou.utils;
 }

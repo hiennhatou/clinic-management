@@ -13,7 +13,7 @@ CREATE TABLE medicine_ingredient
 
 CREATE UNIQUE INDEX index_1 ON medicine_ingredient (medicine_id, ingredient_id);
 
-CREATE TABLE users
+CREATE TABLE user
 (
     id          bigint auto_increment                             NOT NULL PRIMARY KEY,
     first_name  nvarchar(80)                                      NOT NULL,
@@ -121,7 +121,7 @@ ALTER TABLE prescription_medicine
 ALTER TABLE prescriptions
     ADD CONSTRAINT prescriptions_medical_record_id_fk FOREIGN KEY (medical_record_id) REFERENCES medical_records (id);
 ALTER TABLE patients
-    ADD CONSTRAINT user_id_fk FOREIGN KEY (id) REFERENCES users (id);
+    ADD CONSTRAINT user_id_fk FOREIGN KEY (id) REFERENCES user (id);
 ALTER TABLE allergic_ingredients
     ADD CONSTRAINT patient_id_fk FOREIGN KEY (patient_id) REFERENCES patients (id);
 ALTER TABLE allergic_ingredients

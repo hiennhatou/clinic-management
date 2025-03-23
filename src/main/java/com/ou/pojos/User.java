@@ -9,10 +9,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Prescriptions {
+public class User {
 
   private long id;
-  private long medicalRecordId;
-  private long isProvided;
+  private String firstName;
+  private String lastName;
+  private String middleName;
+  private String username;
+  private String role;
+  private String password;
+  private String salt;
 
 }

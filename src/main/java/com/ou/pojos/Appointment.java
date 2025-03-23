@@ -9,12 +9,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Medicines {
+public class Appointment {
 
   private long id;
-  private String name;
-  private long price;
-  private String unit;
-  private String useness;
+  private long patientId;
+  private String periodTime;
+  private java.sql.Date appointmentDate;
+  private String symptom;
+  private long isMeet;
 
 }

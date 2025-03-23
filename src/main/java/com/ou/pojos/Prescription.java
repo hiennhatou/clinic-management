@@ -5,18 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+public class Prescription {
 
   private long id;
-  private String firstName;
-  private String lastName;
-  private String middleName;
-  private String username;
-  private String role;
-  private String password;
+  private long medicalRecordId;
+  private long isProvided;
+  private List<PrescriptionMedicine> medicines;
 
 }
