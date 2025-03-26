@@ -1,19 +1,17 @@
 package com.ou.pojos;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Patient {
+public class Patient extends User {
 
-  private long id;
-  private java.sql.Date birthday;
-  private long idCode;
-  private String countryside;
+    private LocalDate birthday;
+    private String idCode;
 
 }

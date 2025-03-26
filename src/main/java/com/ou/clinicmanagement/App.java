@@ -1,8 +1,12 @@
 package com.ou.clinicmanagement;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,8 +23,12 @@ public class App extends Application {
         stage.show();
     }
 
-    public static void moveScene(String fxml) throws IOException {
-        App.scene.setRoot(getFXMLLoader(fxml).load());
+    public static void moveScene(String fxml) {
+        try {
+            App.scene.setRoot(getFXMLLoader(fxml).load());
+        } catch (IOException ignored) {
+
+        }
     }
 
     public static void setTitle(String title) {
@@ -33,5 +41,16 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static void showAlert(Alert.AlertType alertType, String title, String message, String headerText, EventHandler<DialogEvent> event) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType);
+            alert.setTitle(title);
+            alert.setHeaderText(headerText);
+            alert.setContentText(message);
+            alert.setOnHiding(event);
+            alert.showAndWait();
+        });
     }
 }

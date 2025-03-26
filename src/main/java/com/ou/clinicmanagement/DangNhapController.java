@@ -6,9 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -18,22 +18,22 @@ import lombok.SneakyThrows;
 public class DangNhapController implements Initializable {
     @FXML
     private Text tosignup;
-    
+
     @FXML
     private TextField username;
-    
+
     @FXML
     private PasswordField password;
-    
+
     @FXML
     private Button loginbtn;
-    
+
     @FXML
     private Button closebtn;
-    
+
     @FXML
     private Text errorMsg;
-    
+
     @FXML
     private VBox loader;
 
@@ -46,9 +46,7 @@ public class DangNhapController implements Initializable {
     }
 
     private void moveToSignup(MouseEvent mouseEvent) {
-        try {
-            App.moveScene("dang-ky.fxml");
-        } catch (IOException ignored) {}
+        App.moveScene("dang-ky.fxml");
     }
 
     private void onLogin(ActionEvent actionEvent) {

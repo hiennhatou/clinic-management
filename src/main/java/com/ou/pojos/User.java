@@ -11,13 +11,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User {
 
-  private long id;
-  private String firstName;
-  private String lastName;
-  private String middleName;
-  private String username;
-  private String role;
-  private String password;
-  private String salt;
+    private long id;
+    private String firstName;
+    private String lastName;
+    private String middleName;
+    private String username;
+    private String role;
+    private String password;
+    private String salt;
 
 }
