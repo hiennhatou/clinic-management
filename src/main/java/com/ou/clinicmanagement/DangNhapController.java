@@ -29,9 +29,6 @@ public class DangNhapController implements Initializable {
     private Button loginbtn;
 
     @FXML
-    private Button closebtn;
-
-    @FXML
     private Text errorMsg;
 
     @FXML

@@ -15,7 +15,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -38,8 +37,6 @@ public class DangKyController implements Initializable {
     private DatePicker dateOfBirth;
     @FXML
     private TextField idCode;
-    @FXML
-    private Button closeBtn;
     @FXML
     private Button signUpBtn;
     @FXML

@@ -92,7 +92,6 @@
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
                 <buttons>
                     <Button id="loginbtn" fx:id="signUpBtn" mnemonicParsing="false" text="Đăng ký" />
-                    <Button id="closebtn" fx:id="closeBtn" mnemonicParsing="false" text="Đóng" />
                 </buttons>
             </ButtonBar>
         </VBox>
