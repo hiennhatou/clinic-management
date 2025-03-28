@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.scene.control.Button;
@@ -71,6 +72,7 @@ public class LoginController implements Initializable {
                 errorMsg.setText(e.getMessage());
             } catch (Exception e) {
                 App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Lỗi hệ thống", null, null);
+                Logger.getLogger(App.class.getName()).log(Level.WARNING, e.getMessage(), e);
             } finally {
                 loader.setVisible(false);
             }

@@ -58,7 +58,7 @@ public class UserService {
         return user;
     }
 
-    public User getCurrentUser() {
+    static public User getCurrentUser() {
         try {
             String username = SecureStorage.retrieve("username");
             if (username == null) return null;

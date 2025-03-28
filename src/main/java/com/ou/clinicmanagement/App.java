@@ -1,5 +1,6 @@
 package com.ou.clinicmanagement;
 
+import com.ou.services.UserService;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -7,10 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogEvent;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class App extends Application {
     private static Scene scene;
@@ -19,7 +21,15 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         App.stage = stage;
-        scene = new Scene(getFXMLLoader("login.fxml").load());
+
+        try {
+            if (UserService.getCurrentUser() == null) throw new RuntimeException("User not logged in");
+            scene = new Scene(getFXMLLoader("welcome.fxml").load());
+        } catch (Exception e) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
+            scene = new Scene(getFXMLLoader("login.fxml").load());
+        }
+
         stage.setScene(scene);
         stage.show();
     }
@@ -29,6 +39,7 @@ public class App extends Application {
             App.scene.setRoot(getFXMLLoader(fxml).load());
         } catch (IOException e) {
             App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Lỗi hệ thống", null, null);
+            Logger.getLogger(App.class.getName()).log(Level.WARNING, e.getMessage(), e);
         }
     }
 
