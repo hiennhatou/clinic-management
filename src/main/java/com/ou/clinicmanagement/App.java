@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogEvent;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         App.stage = stage;
-        scene = new Scene(getFXMLLoader("dang-nhap.fxml").load());
+        scene = new Scene(getFXMLLoader("login.fxml").load());
         stage.setScene(scene);
         stage.show();
     }
@@ -26,8 +27,8 @@ public class App extends Application {
     public static void moveScene(String fxml) {
         try {
             App.scene.setRoot(getFXMLLoader(fxml).load());
-        } catch (IOException ignored) {
-
+        } catch (IOException e) {
+            App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Lỗi hệ thống", null, null);
         }
     }
 

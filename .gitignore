@@ -35,4 +35,5 @@ build/
 .DS_Store
 
 ## Project ##
-db.properties
+*.properties
+!*.pattern.properties

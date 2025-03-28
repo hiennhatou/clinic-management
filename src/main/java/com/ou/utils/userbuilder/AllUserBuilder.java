@@ -1,8 +1,8 @@
 package com.ou.utils.userbuilder;
 
 import com.ou.pojos.User;
-import com.ou.utils.securityhash.SecurityHash;
-import com.ou.utils.securityhash.SecurityHashUtils;
+import com.ou.utils.secure.hash.SecurityHash;
+import com.ou.utils.secure.hash.SecurityHashUtils;
 import lombok.Getter;
 import lombok.Setter;
 
