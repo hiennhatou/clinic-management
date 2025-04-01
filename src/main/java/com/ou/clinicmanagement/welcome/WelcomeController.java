@@ -1,0 +1,78 @@
+package com.ou.clinicmanagement.welcome;
+
+import com.ou.clinicmanagement.App;
+import com.ou.pojos.User;
+import com.ou.services.UserService;
+import com.ou.utils.exceptions.AuthFail;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class WelcomeController implements Initializable {
+    private User currentUser;
+
+    @FXML
+    public Text username;
+
+    @FXML
+    private AnchorPane container;
+
+    @FXML
+    private Button logout;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loadUI();
+        username.setText(currentUser.getFirstName());
+        logout.setOnAction(this::onLogout);
+    }
+
+    private void loadUI() {
+        try {
+            currentUser = UserService.getCurrentUser();
+            if (currentUser == null) throw new AuthFail("");
+            String page = getPage(currentUser);
+            Parent welcomeParent = App.getFXMLLoader(page).load();
+
+            container.getChildren().setAll(welcomeParent);
+        } catch (Exception e) {
+            App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Hệ thống gặp sự cố", null, null);
+            Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, "Error", e);
+            if (e instanceof AuthFail) {
+                App.moveScene("login.fxml");
+            }
+        }
+    }
+
+    private static String getPage(User currentUser) {
+        String page = switch (currentUser.getRole()) {
+            case "ADMIN" -> "welcome-admin.fxml";
+            case "PATIENT" -> "welcome-patient.fxml";
+            case "DOCTOR" -> "welcome-doctor.fxml";
+            case "PHARMACIST" -> "welcome-pharmacist.fxml";
+            case "STAFF" -> "welcome-staff.fxml";
+            default -> null;
+        };
+        return page;
+    }
+
+    private void onLogout(ActionEvent actionEvent) {
+        try {
+            UserService.logout();
+        } catch (Exception ignored) {
+
+        } finally {
+            App.moveScene("login.fxml");
+        }
+    }
+}

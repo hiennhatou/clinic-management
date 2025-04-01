@@ -26,7 +26,8 @@ public class App extends Application {
             if (UserService.getCurrentUser() == null) throw new RuntimeException("User not logged in");
             scene = new Scene(getFXMLLoader("welcome.fxml").load());
         } catch (Exception e) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
+            if (e instanceof IOException)
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
             scene = new Scene(getFXMLLoader("login.fxml").load());
         }
 

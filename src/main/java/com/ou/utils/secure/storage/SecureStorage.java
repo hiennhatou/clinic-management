@@ -28,9 +28,14 @@ public class SecureStorage {
         return encryptedData == null ? null : decrypt(encryptedData);
     }
 
+    static public void delete(String key) {
+        Preferences prefs = Preferences.userNodeForPackage(SecureStorage.class);
+        prefs.remove(PRE_KEY + key);
+    }
+
     private static String encrypt(String data) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         Cipher cipher = Cipher.getInstance("AES");
-        SecretKeySpec key = new SecretKeySpec(getKey(SECRET_KEY), "AES");
+        SecretKeySpec key = new SecretKeySpec(getSecretKey(SECRET_KEY), "AES");
         cipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] encrypted = cipher.doFinal(data.getBytes());
         return Base64.getEncoder().encodeToString(encrypted);
@@ -38,13 +43,13 @@ public class SecureStorage {
 
     private static String decrypt(String data) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         Cipher cipher = Cipher.getInstance("AES");
-        SecretKeySpec key = new SecretKeySpec(getKey(SECRET_KEY), "AES");
+        SecretKeySpec key = new SecretKeySpec(getSecretKey(SECRET_KEY), "AES");
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] original = cipher.doFinal(Base64.getDecoder().decode(data));
         return new String(original);
     }
 
-    private static byte[] getKey(String key) throws NoSuchAlgorithmException {
+    private static byte[] getSecretKey(String key) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         return digest.digest(key.getBytes());
     }

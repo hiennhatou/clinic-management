@@ -7,6 +7,7 @@ import com.ou.utils.secure.hash.SecurityHash;
 import com.ou.utils.secure.hash.SecurityHashUtils;
 import com.ou.utils.secure.storage.SecureStorage;
 import com.ou.utils.userbuilder.UserBuilder;
+import javafx.event.ActionEvent;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -82,5 +83,9 @@ public class UserService {
                  InvalidKeyException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    static public void logout() {
+        SecureStorage.delete("username");
     }
 }
