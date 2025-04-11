@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.clinicmanagement.DangKyController">
+    <children>
+        <VBox alignment="CENTER" maxHeight="625.0" maxWidth="800.0" minHeight="500.0" minWidth="800.0" prefHeight="625.0" prefWidth="800.0">
+            <padding>
+                <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
+            </padding>
+            <VBox prefHeight="142.0" prefWidth="860.0" style="-fx-gap: 20;">
+                <VBox alignment="CENTER" prefHeight="268.0" prefWidth="860.0">
+                    <Text fill="#3c9076" strokeType="OUTSIDE" strokeWidth="0.0" text="Hệ thống quản lý bệnh nhân" textAlignment="CENTER" wrappingWidth="482.4200134277344">
+                        <font>
+                            <Font name="System Bold" size="28.0" />
+                        </font>
+                    </Text>
+                </VBox>
+                <VBox alignment="BOTTOM_CENTER" prefHeight="245.0" prefWidth="860.0">
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Đăng ký">
+                        <font>
+                            <Font size="25.0" />
+                        </font>
+                    </Text>
+                </VBox>
+            </VBox>
+            <GridPane prefHeight="265.0" prefWidth="720.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="423.0" minWidth="10.0" prefWidth="137.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="708.0" minWidth="10.0" prefWidth="232.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="708.0" minWidth="10.0" prefWidth="37.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="708.0" minWidth="10.0" prefWidth="129.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="708.0" minWidth="10.0" prefWidth="217.0" />
+                </columnConstraints>
+                <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <VBox.margin>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </VBox.margin>
+            <TextField fx:id="idCode" prefHeight="28.0" prefWidth="227.0" GridPane.columnIndex="1" />
+            <TextField fx:id="firstName" GridPane.columnIndex="4" />
+            <TextField fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="middleName" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                <TextField fx:id="username" prefHeight="28.0" prefWidth="583.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <PasswordField fx:id="passwordField" prefHeight="28.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <DatePicker fx:id="dateOfBirth" prefHeight="26.0" prefWidth="269.0" promptText="dd/mm/yyyy" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tên đăng nhập:" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Text>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mật khẩu:" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Text>
+                <Text fx:id="toLogin" fill="#6691ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Chưa có tài khoản? Đăng ký tại đây" underline="true" GridPane.rowIndex="4">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Text>
+                <Text fx:id="errorMsg" fill="#bf0e0e" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="500.0" GridPane.rowIndex="5" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CCCD:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tên:" GridPane.columnIndex="3">
+               <font>
+                  <Font size="15.0" />
+               </font></Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Họ" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font></Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tên đệm:" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font></Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày sinh:" GridPane.rowIndex="3">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            </GridPane>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                <buttons>
+                    <Button id="loginbtn" fx:id="signUpBtn" mnemonicParsing="false" text="Đăng ký" />
+                </buttons>
+            </ButtonBar>
+        </VBox>
+        <VBox fx:id="loader" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #0006;" visible="false">
+            <children>
+                <ProgressIndicator prefHeight="100.0" prefWidth="100.0" />
+            </children>
+        </VBox>
+    </children>
+</StackPane>

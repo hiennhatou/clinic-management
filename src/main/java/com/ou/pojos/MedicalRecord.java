@@ -9,11 +9,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Patients {
+public class MedicalRecord {
 
   private long id;
-  private java.sql.Date birthday;
-  private long idCode;
-  private String countryside;
+  private long patientId;
+  private String symptom;
+  private String conclusion;
+  private String treatmentInstruction;
+  private java.sql.Timestamp examinationDate;
 
 }

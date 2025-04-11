@@ -9,13 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MedicalRecords {
+public class AllergicIngredient {
 
   private long id;
   private long patientId;
-  private String symptom;
-  private String conclusion;
-  private String treatmentInstruction;
-  private java.sql.Timestamp examinationDate;
+  private long ingredientId;
 
 }

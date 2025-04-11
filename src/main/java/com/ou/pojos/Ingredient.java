@@ -9,13 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Appointments {
-
+public class Ingredient {
   private long id;
-  private long patientId;
-  private String periodTime;
-  private java.sql.Date appointmentDate;
-  private String symptom;
-  private long isMeet;
-
+  private String name;
 }

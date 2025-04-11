@@ -27,10 +27,9 @@ CREATE TABLE users
 
 CREATE TABLE patients
 (
-    id          bigint auto_increment NOT NULL PRIMARY KEY,
-    birthday    date                  NOT NULL,
-    id_code     bigint                NOT NULL UNIQUE,
-    countryside nvarchar(255)
+    id       bigint       NOT NULL PRIMARY KEY,
+    birthday date         NOT NULL,
+    id_code  nvarchar(12) NOT NULL UNIQUE
 );
 
 CREATE INDEX index_1 ON patients (id, id_code);
@@ -121,7 +120,7 @@ ALTER TABLE prescription_medicine
 ALTER TABLE prescriptions
     ADD CONSTRAINT prescriptions_medical_record_id_fk FOREIGN KEY (medical_record_id) REFERENCES medical_records (id);
 ALTER TABLE patients
-    ADD CONSTRAINT user_id_fk FOREIGN KEY (id) REFERENCES users (id);
+    ADD CONSTRAINT user_id_fk FOREIGN KEY (id) REFERENCES users (id) ON DELETE CASCADE;
 ALTER TABLE allergic_ingredients
     ADD CONSTRAINT patient_id_fk FOREIGN KEY (patient_id) REFERENCES patients (id);
 ALTER TABLE allergic_ingredients
