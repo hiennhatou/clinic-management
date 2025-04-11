@@ -6,7 +6,6 @@ import com.ou.utils.DatePickerConverter;
 import com.ou.utils.exceptions.ValidatorException;
 import com.ou.utils.userbuilder.PatientBuilder;
 import com.ou.utils.userbuilder.UserBuilder;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,12 +14,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class DangKyController implements Initializable {
+public class RegisterController implements Initializable {
     UserService userService = new UserService();
 
     @FXML
@@ -62,7 +62,7 @@ public class DangKyController implements Initializable {
                 UserBuilder userBuilder = new PatientBuilder(patient);
                 Thread a = Thread.ofVirtual().start(() -> userService.createUser(userBuilder));
                 a.join();
-                App.showAlert(Alert.AlertType.INFORMATION, "Đăng ký", "Đăng ký thành công", null, e -> App.moveScene("dang-nhap.fxml"));
+                App.showAlert(Alert.AlertType.INFORMATION, "Đăng ký", "Đăng ký thành công", null, e -> App.moveScene("login.fxml"));
             } catch (ValidatorException e) {
                 errorMsg.setText(e.getMessage());
             } catch (Exception e) {
@@ -74,7 +74,7 @@ public class DangKyController implements Initializable {
     }
 
     private void onMoveToLogin(MouseEvent event) {
-        App.moveScene("dang-nhap.fxml");
+        App.moveScene("login.fxml");
     }
 
     private Patient validateFields() {

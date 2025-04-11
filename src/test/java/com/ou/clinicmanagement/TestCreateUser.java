@@ -1,4 +1,4 @@
-package com.ou.clinicmanagement.userservice;
+package com.ou.clinicmanagement;
 
 import com.ou.pojos.DBUtils;
 import com.ou.pojos.Patient;

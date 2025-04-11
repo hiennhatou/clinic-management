@@ -2,8 +2,8 @@ package com.ou.clinicmanagement;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.ou.utils.securityhash.SecurityHash;
-import com.ou.utils.securityhash.SecurityHashUtils;
+import com.ou.utils.secure.hash.SecurityHash;
+import com.ou.utils.secure.hash.SecurityHashUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

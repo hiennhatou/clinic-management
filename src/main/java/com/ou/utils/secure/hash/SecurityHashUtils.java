@@ -1,4 +1,4 @@
-package com.ou.utils.securityhash;
+package com.ou.utils.secure.hash;
 
 import com.ou.utils.HexUtils;
 

@@ -3,6 +3,7 @@ module com.ou.clinicmanagement {
     requires javafx.fxml;
     requires static lombok;
     requires java.sql;
+    requires java.prefs;
 
     opens com.ou.clinicmanagement to javafx.fxml;
     exports com.ou.clinicmanagement;
@@ -10,5 +11,5 @@ module com.ou.clinicmanagement {
     exports com.ou.services;
     exports com.ou.utils;
     exports com.ou.utils.userbuilder;
-    exports com.ou.utils.securityhash;
+    exports com.ou.utils.secure.hash;
 }

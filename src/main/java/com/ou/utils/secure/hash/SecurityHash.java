@@ -1,4 +1,4 @@
-package com.ou.utils.securityhash;
+package com.ou.utils.secure.hash;
 
 import lombok.Getter;
 import lombok.Setter;
