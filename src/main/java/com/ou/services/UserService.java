@@ -6,7 +6,6 @@ import com.ou.utils.exceptions.AuthFail;
 import com.ou.utils.secure.hash.SecurityHash;
 import com.ou.utils.secure.hash.SecurityHashUtils;
 import com.ou.utils.secure.storage.SecureStorage;
-import com.ou.utils.userbuilder.UserBuilder;
 import javafx.event.ActionEvent;
 
 import javax.crypto.BadPaddingException;
@@ -21,23 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserService {
-    public User createUser(UserBuilder userBuilder) {
-        try (Connection conn = DBUtils.getConnection()) {
-            conn.setAutoCommit(false);
-            PreparedStatement stm = userBuilder.build(conn);
-            if (stm == null) {
-                conn.rollback();
-                return null;
-            }
-            conn.commit();
-            return userBuilder.getUser();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public User authenticate(String username, String password) {
-        User user = null;
+    public boolean authenticate(String username, String password) {
         try (Connection conn = DBUtils.getConnection()) {
             PreparedStatement stm = conn.prepareStatement("select * from users where username=?");
             stm.setString(1, username);
@@ -45,18 +28,12 @@ public class UserService {
             if (!rs.next()) throw new AuthFail("Thông tin đăng nhập không hợp lệ");
             SecurityHash hash = new SecurityHash(rs.getString("password"), rs.getString("salt"));
             if (!SecurityHashUtils.verifyPassword(password, hash)) throw new AuthFail("Thông tin đăng nhập không hợp lệ");
-            user = new User();
-            user.setUsername(rs.getString("username"));
-            user.setFirstName(rs.getString("first_name"));
-            user.setLastName(rs.getString("last_name"));
-            user.setMiddleName(rs.getString("middle_name"));
-            user.setRole(rs.getString("role"));
-            SecureStorage.store("username", user.getUsername());
+            SecureStorage.store("username", rs.getString("username"));
+            return true;
         } catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException | NoSuchPaddingException |
                  IllegalBlockSizeException | BadPaddingException | InvalidKeyException e) {
             throw new RuntimeException(e);
         }
-        return user;
     }
 
     static public User getCurrentUser() {

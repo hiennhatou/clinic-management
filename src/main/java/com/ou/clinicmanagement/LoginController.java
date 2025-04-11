@@ -26,9 +26,6 @@ public class LoginController implements Initializable {
     UserService userService = new UserService();
 
     @FXML
-    private Text tosignup;
-
-    @FXML
     private TextField username;
 
     @FXML
@@ -48,11 +45,6 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         App.setTitle("Đăng nhập");
         loginbtn.setOnAction(this::onLogin);
-        tosignup.setOnMouseClicked(this::moveToSignup);
-    }
-
-    private void moveToSignup(MouseEvent mouseEvent) {
-        App.moveScene("register.fxml");
     }
 
     private void onLogin(ActionEvent actionEvent) {
