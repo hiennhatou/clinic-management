@@ -57,7 +57,6 @@ public class WelcomeController implements Initializable {
     private static String getPage(User currentUser) {
         String page = switch (currentUser.getRole()) {
             case "ADMIN" -> "welcome-admin.fxml";
-            case "PATIENT" -> "welcome-patient.fxml";
             case "DOCTOR" -> "welcome-doctor.fxml";
             case "PHARMACIST" -> "welcome-pharmacist.fxml";
             case "STAFF" -> "welcome-staff.fxml";
