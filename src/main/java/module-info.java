@@ -12,4 +12,6 @@ module com.ou.clinicmanagement {
     exports com.ou.utils;
     exports com.ou.utils.userbuilder;
     exports com.ou.utils.secure.hash;
+    exports com.ou.clinicmanagement.welcome;
+    opens com.ou.clinicmanagement.welcome to javafx.fxml;
 }

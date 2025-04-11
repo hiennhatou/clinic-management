@@ -38,9 +38,6 @@ public class TestCreateUser {
         user.setRole("ADMIN");
         UserBuilder userBuilder = new AllUserBuilder(user);
         User result = userService.createUser(userBuilder);
-        System.out.println("1");
-        System.out.println(result.getPassword());
-        System.out.println(result.getSalt());
         Assertions.assertNotNull(result);
         try (Connection connection = DBUtils.getConnection()) {
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
@@ -63,13 +60,10 @@ public class TestCreateUser {
         patient.setUsername("johndoe");
         patient.setPassword("Hello1234@");
         patient.setRole("PATIENT");
-        patient.setIdCode("Doctor@1234567");
+        patient.setIdCode("123456789");
         patient.setBirthday(new Date(1072890000).toLocalDate());
         UserBuilder userBuilder = new AllUserBuilder(patient);
         User result = userService.createUser(userBuilder);
-        System.out.println("2");
-        System.out.println(result.getPassword());
-        System.out.println(result.getSalt());
         Assertions.assertNotNull(result);
         try (Connection connection = DBUtils.getConnection()) {
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM users WHERE username = ?");

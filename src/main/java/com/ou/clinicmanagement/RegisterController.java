@@ -6,15 +6,15 @@ import com.ou.utils.DatePickerConverter;
 import com.ou.utils.exceptions.ValidatorException;
 import com.ou.utils.userbuilder.PatientBuilder;
 import com.ou.utils.userbuilder.UserBuilder;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -49,11 +49,10 @@ public class RegisterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dateOfBirth.setConverter(new DatePickerConverter());
-        signUpBtn.setOnAction(this::onLogin);
-        toLogin.setOnMouseClicked(this::onMoveToLogin);
+        signUpBtn.setOnAction(v -> onSignUp());
     }
 
-    private void onLogin(ActionEvent actionEvent) {
+    private void onSignUp() {
         Thread.ofVirtual().start(() -> {
             try {
                 loader.setVisible(true);
