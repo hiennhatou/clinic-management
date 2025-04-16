@@ -2,15 +2,18 @@ package com.ou.clinicmanagement.welcome;
 
 import com.ou.clinicmanagement.App;
 import com.ou.pojos.User;
+import com.ou.services.AuthService;
 import com.ou.services.UserService;
 import com.ou.utils.exceptions.AuthFail;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -39,10 +42,11 @@ public class WelcomeController implements Initializable {
 
     private void loadUI() {
         try {
-            currentUser = UserService.getCurrentUser();
+            currentUser = AuthService.getCurrentUser();
             if (currentUser == null) throw new AuthFail("");
             String page = getPage(currentUser);
             Parent welcomeParent = App.getFXMLLoader(page).load();
+
 
             container.getChildren().setAll(welcomeParent);
         } catch (Exception e) {
@@ -55,19 +59,18 @@ public class WelcomeController implements Initializable {
     }
 
     private static String getPage(User currentUser) {
-        String page = switch (currentUser.getRole()) {
+        return switch (currentUser.getRole()) {
             case "ADMIN" -> "welcome-admin.fxml";
             case "DOCTOR" -> "welcome-doctor.fxml";
             case "PHARMACIST" -> "welcome-pharmacist.fxml";
             case "STAFF" -> "welcome-staff.fxml";
             default -> null;
         };
-        return page;
     }
 
     private void onLogout(ActionEvent actionEvent) {
         try {
-            UserService.logout();
+            AuthService.logout();
         } catch (Exception ignored) {
 
         } finally {

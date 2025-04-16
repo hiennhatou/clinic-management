@@ -5,15 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class Appointment {
+public class Ticket {
   private long id;
   private long patientId;
-  private String periodTime;
-  private java.sql.Date appointmentDate;
-  private String symptom;
-  private long isCheckin;
+  private java.sql.Timestamp createdOn;
+  private java.sql.Timestamp updatedOn;
 }

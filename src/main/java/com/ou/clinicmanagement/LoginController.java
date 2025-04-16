@@ -1,16 +1,14 @@
 package com.ou.clinicmanagement;
 
-import com.ou.services.UserService;
+import com.ou.services.AuthService;
 import com.ou.utils.exceptions.AuthFail;
 import com.ou.utils.exceptions.ValidatorException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -23,7 +21,7 @@ import javafx.scene.layout.VBox;
 import lombok.SneakyThrows;
 
 public class LoginController implements Initializable {
-    UserService userService = new UserService();
+    AuthService authService = new AuthService();
 
     @FXML
     private TextField username;
@@ -58,7 +56,7 @@ public class LoginController implements Initializable {
                 if (username == null || password == null || username.isEmpty() || password.isEmpty())
                     throw new ValidatorException("Vui lòng nhập đầy đủ thông tin", "general");
 
-                userService.authenticate(username, password);
+                authService.authenticate(username, password);
                 App.moveScene("welcome.fxml");
             } catch (ValidatorException | AuthFail e) {
                 errorMsg.setText(e.getMessage());
