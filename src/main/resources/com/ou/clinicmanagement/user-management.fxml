@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="606.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.clinicmanagement.UserManagement">
+      <Pane prefHeight="215.0" prefWidth="677.0">
+            <TextField fx:id="nameTextField" layoutX="105.0" layoutY="62.0" prefHeight="26.0" prefWidth="132.0" />
+            <TextField fx:id="lastNameTextField" layoutX="302.0" layoutY="62.0" prefHeight="26.0" prefWidth="139.0" />
+            <TextField fx:id="middleNameTextField" layoutX="511.0" layoutY="62.0" prefHeight="26.0" prefWidth="154.0" />
+            <TextField fx:id="usernameTextField" layoutX="105.0" layoutY="122.0" prefHeight="26.0" prefWidth="132.0" />
+            <ChoiceBox fx:id="roleChoiceBox" layoutX="302.0" layoutY="122.0" prefHeight="26.0" prefWidth="139.0" />
+            <PasswordField fx:id="passwordInput" layoutX="511.0" layoutY="122.0" prefHeight="26.0" prefWidth="154.0" />
+            <Button fx:id="addUserBtn" layoutX="5.0" layoutY="157.0" mnemonicParsing="false" text="Thêm tài khoản" />
+            <Label layoutX="5.0" layoutY="66.0" text="Tên" />
+            <Label layoutX="5.0" layoutY="126.0" text="Tên đăng nhập" />
+            <Label layoutX="253.0" layoutY="66.0" text="Họ" />
+            <Label layoutX="253.0" layoutY="126.0" text="Vai trò" />
+            <Label layoutX="448.0" layoutY="66.0" text="Tên đệm" />
+            <Label layoutX="448.0" layoutY="126.0" text="Mật khẩu" />
+      <Button fx:id="deleteBtn" layoutX="518.0" layoutY="183.0" mnemonicParsing="false" text="Xóa tài khoản đã chọn" />
+      <Button fx:id="backToMainMenu" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Quay lại màn hình chính" />
+      </Pane>
+      <Pane>
+            <TableView fx:id="tblView" editable="true" prefHeight="325.0" prefWidth="677.0" />
+      </Pane>
+</VBox>

@@ -10,11 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MedicineIngredient {
-
   private long id;
   private long medicineId;
   private long ingredientId;
   private double quantity;
   private String unit;
-
 }

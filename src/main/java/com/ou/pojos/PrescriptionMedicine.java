@@ -10,11 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PrescriptionMedicine {
-
   private long id;
   private long prescriptionId;
   private long medicineId;
   private double quantity;
   private String instrument;
-
 }

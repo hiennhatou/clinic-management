@@ -10,9 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AllergicIngredient {
-
   private long id;
   private long patientId;
   private long ingredientId;
-
 }

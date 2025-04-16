@@ -1,5 +1,6 @@
 package com.ou.clinicmanagement;
 
+import com.ou.services.AuthService;
 import com.ou.services.UserService;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -23,7 +24,7 @@ public class App extends Application {
         App.stage = stage;
 
         try {
-            if (UserService.getCurrentUser() == null) throw new RuntimeException("User not logged in");
+            if (AuthService.getCurrentUser() == null) throw new RuntimeException("User not logged in");
             scene = new Scene(getFXMLLoader("welcome.fxml").load());
         } catch (Exception e) {
             if (e instanceof IOException)
