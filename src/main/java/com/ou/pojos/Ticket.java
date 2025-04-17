@@ -12,6 +12,7 @@ import lombok.Setter;
 public class Ticket {
   private long id;
   private long patientId;
+  private long doctorId;
   private java.sql.Timestamp createdOn;
   private java.sql.Timestamp updatedOn;
 }

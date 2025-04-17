@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="606.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.clinicmanagement.UserManagement">
+<VBox prefHeight="606.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.clinicmanagement.UserManagementController">
       <Pane prefHeight="215.0" prefWidth="677.0">
             <TextField fx:id="nameTextField" layoutX="105.0" layoutY="62.0" prefHeight="26.0" prefWidth="132.0" />
             <TextField fx:id="lastNameTextField" layoutX="302.0" layoutY="62.0" prefHeight="26.0" prefWidth="139.0" />

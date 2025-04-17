@@ -4,7 +4,7 @@ import com.ou.pojos.DBUtils;
 import com.ou.pojos.User;
 import com.ou.utils.secure.hash.SecurityHash;
 import com.ou.utils.secure.hash.SecurityHashUtils;
-import com.ou.utils.secure.validation.UserValidation;
+import com.ou.utils.validation.UserValidation;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;

@@ -1,4 +1,19 @@
 package com.ou.clinicmanagement.welcome;
 
-public class WelcomeStaffController {
+import com.ou.clinicmanagement.App;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class WelcomeStaffController implements Initializable {
+    @FXML
+    public Button toPatientManagement;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        toPatientManagement.setOnAction(event -> App.moveScene("patient-management.fxml", true));
+    }
 }

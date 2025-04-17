@@ -1,12 +1,14 @@
 package com.ou.clinicmanagement.welcome;
 
 import com.ou.clinicmanagement.App;
+import com.ou.clinicmanagement.RootStack;
 import com.ou.pojos.User;
 import com.ou.services.AuthService;
 import com.ou.services.UserService;
 import com.ou.utils.exceptions.AuthFail;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -53,7 +55,8 @@ public class WelcomeController implements Initializable {
             App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Hệ thống gặp sự cố", null, null);
             Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, "Error", e);
             if (e instanceof AuthFail) {
-                App.moveScene("login.fxml");
+                RootStack.clear();
+                App.moveScene("login.fxml", false);
             }
         }
     }
@@ -74,7 +77,8 @@ public class WelcomeController implements Initializable {
         } catch (Exception ignored) {
 
         } finally {
-            App.moveScene("login.fxml");
+            RootStack.clear();
+            App.moveScene("login.fxml", false);
         }
     }
 }

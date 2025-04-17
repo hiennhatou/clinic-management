@@ -13,7 +13,7 @@ public class WelcomeAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mvToUserManagement.setOnAction(event -> {
-            App.moveScene("user-management.fxml");
+            App.moveScene("user-management.fxml", true);
         });
     }
 }

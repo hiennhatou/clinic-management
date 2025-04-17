@@ -57,7 +57,7 @@ public class LoginController implements Initializable {
                     throw new ValidatorException("Vui lòng nhập đầy đủ thông tin", "general");
 
                 authService.authenticate(username, password);
-                App.moveScene("welcome.fxml");
+                App.moveScene("welcome.fxml", false);
             } catch (ValidatorException | AuthFail e) {
                 errorMsg.setText(e.getMessage());
             } catch (Exception e) {

@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserManagement implements Initializable {
+public class UserManagementController implements Initializable {
     @FXML
     public TextField nameTextField;
     @FXML
@@ -54,7 +54,7 @@ public class UserManagement implements Initializable {
         addUserBtn.setOnAction(event -> onAddUser());
         deleteBtn.setOnAction(event -> deleteUsers());
         roleChoiceBox.setItems(FXCollections.observableList(List.of("ADMIN", "DOCTOR", "PHARMACIST", "STAFF")));
-        backToMainMenu.setOnAction(event -> App.moveScene("welcome.fxml"));
+        backToMainMenu.setOnAction(event -> App.back());
         initUserList();
     }
 
@@ -72,7 +72,7 @@ public class UserManagement implements Initializable {
             try {
                 user.setFirstName(userService.updateFirstName(event.getNewValue(), user.getId()));
             } catch (SQLException e) {
-                Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, e);
                 App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Hệ thống gặp lỗi", null, null);
             } catch (ValidatorException e) {
                 App.showAlert(Alert.AlertType.ERROR, "Mật khẩu chưa được lưu", e.getMessage(), "Mật khẩu không đủ mạnh!", null);
@@ -88,7 +88,7 @@ public class UserManagement implements Initializable {
             try {
                 user.setLastName(userService.updateLastName(event.getNewValue(), user.getId()));
             } catch (SQLException e) {
-                Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, e);
                 App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Hệ thống gặp lỗi", null, null);
             }
         });
@@ -102,7 +102,7 @@ public class UserManagement implements Initializable {
             try {
                 user.setMiddleName(userService.updateMiddleName(event.getNewValue(), user.getId()));
             } catch (SQLException e) {
-                Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, e);
                 App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Hệ thống gặp lỗi", null, null);
             }
         });
@@ -121,7 +121,7 @@ public class UserManagement implements Initializable {
                     tblView.refresh();
                     return;
                 }
-                Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, e);
                 App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Hệ thống gặp lỗi", null, null);
             } catch (ValidatorException e) {
                 App.showAlert(Alert.AlertType.ERROR, "Tên đăng nhập chưa được lưu", e.getMessage(), null, null);
@@ -137,7 +137,7 @@ public class UserManagement implements Initializable {
             try {
                 user.setRole(userService.updateRole(event.getNewValue(), user.getId()));
             } catch (SQLException e) {
-                Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, e);
                 App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Hệ thống gặp lỗi", null, null);
             } catch (ValidatorException e) {
                 App.showAlert(Alert.AlertType.ERROR, "Vai trò chưa được lưu", e.getMessage(), null, null);
@@ -146,36 +146,34 @@ public class UserManagement implements Initializable {
 
 //        Mật khẩu (TextField)
         TableColumn<User, String> passwordCol = new TableColumn<>("Mật khẩu");
-        passwordCol.setCellFactory(tbc -> {
-            TextFieldTableCell<User, String> cell = new TextFieldTableCell<>() {
-                @Override
-                public void commitEdit(String s) {
-                    super.commitEdit(s);
-                    User user = getTableView().getItems().get(getIndex());
-                    try {
-                        userService.updatePassword(s, user.getId());
-                    } catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
-                        Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, e);
-                        App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Hệ thống gặp lỗi", null, null);
-                    } catch (ValidatorException e) {
-                        App.showAlert(Alert.AlertType.ERROR, "Mật khẩu chưa được lưu", e.getMessage(), "Mật khẩu không đủ mạnh!", null);
+        passwordCol.setCellFactory(tbc -> new TextFieldTableCell<User, String>() {
+            {
+                setConverter(new StringConverter<>() {
+                    @Override
+                    public String fromString(String s) {
+                        return s;
                     }
-                }
-            };
 
-            cell.setConverter(new StringConverter<>() {
-                @Override
-                public String fromString(String s) {
-                    return s;
-                }
+                    @Override
+                    public String toString(String s) {
+                        return isEditing() ? "" : "********";
+                    }
+                });
+            }
 
-                @Override
-                public String toString(String s) {
-                    return cell.isEditing() ? "" : "********";
+            @Override
+            public void commitEdit(String s) {
+                super.commitEdit(s);
+                User user = getTableView().getItems().get(getIndex());
+                try {
+                    userService.updatePassword(s, user.getId());
+                } catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
+                    Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, e);
+                    App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Hệ thống gặp lỗi", null, null);
+                } catch (ValidatorException e) {
+                    App.showAlert(Alert.AlertType.ERROR, "Mật khẩu chưa được lưu", e.getMessage(), "Mật khẩu không đủ mạnh!", null);
                 }
-            });
-
-            return cell;
+            }
         });
 
         tblView.getColumns().addAll(Arrays.asList(idCol, firstnameCol, lastnameCol, middleNameCol, usernameCol, roleCol, passwordCol));
@@ -198,7 +196,7 @@ public class UserManagement implements Initializable {
         } catch (ValidatorException e) {
             App.showAlert(Alert.AlertType.ERROR, "Tài khoản chưa được lưu", e.getMessage(), null, null);
         } catch (SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
-            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, e);
             App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Hệ thống gặp lỗi", null, null);
         }
     }

@@ -3,9 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="30.0" vgap="20.0" xmlns="http://javafx.com/javafx/17.0.12"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.clinicmanagement.welcome.WelcomeStaffController">
-    <Button mnemonicParsing="false" text="Lịch khám"/>
-    <Button mnemonicParsing="false" text="Phiếu khám"/>
-    <Button mnemonicParsing="false" text="Hồ sơ bệnh nhân"/>
+<FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="30.0" vgap="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.clinicmanagement.welcome.WelcomeStaffController">
+    <Button mnemonicParsing="false" text="Lịch khám" />
+    <Button mnemonicParsing="false" text="Phiếu khám" />
+    <Button fx:id="toPatientManagement" mnemonicParsing="false" text="Hồ sơ bệnh nhân" />
 </FlowPane>
