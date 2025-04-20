@@ -1,4 +1,4 @@
-package com.ou.utils.secure.validation;
+package com.ou.utils.validation;
 
 import com.ou.pojos.User;
 import com.ou.utils.exceptions.ValidatorException;

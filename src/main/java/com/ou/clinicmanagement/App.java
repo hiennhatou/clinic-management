@@ -1,7 +1,6 @@
 package com.ou.clinicmanagement;
 
 import com.ou.services.AuthService;
-import com.ou.services.UserService;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -10,12 +9,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogEvent;
 import javafx.stage.Stage;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class App extends Application {
+    @Getter
     private static Scene scene;
     private static Stage stage;
 
@@ -36,12 +37,20 @@ public class App extends Application {
         stage.show();
     }
 
-    public static void moveScene(String fxml) {
+    public static void moveScene(String fxml, boolean isAddStack) {
         try {
+            if (isAddStack)
+                RootStack.push(scene.getRoot());
             App.scene.setRoot(getFXMLLoader(fxml).load());
         } catch (IOException e) {
             App.showAlert(Alert.AlertType.ERROR, "Lỗi", "Lỗi hệ thống", null, null);
             Logger.getLogger(App.class.getName()).log(Level.WARNING, e.getMessage(), e);
+        }
+    }
+
+    public static void back() {
+        if (RootStack.size() > 0) {
+            scene.setRoot(RootStack.pop());
         }
     }
 

@@ -13,9 +13,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Patient extends User {
-    private LocalDate birthday;
     private String idCode;
     private String firstName;
     private String lastName;
     private String middleName;
+    private LocalDate birthday;
 }
