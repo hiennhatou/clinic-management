@@ -16,7 +16,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
-    public List<User> getAllUsers() {
+    public List<User> getAllUsersByRole(String role) throws SQLException {
+        List<User> users = new ArrayList<>();
+        try (Connection conn = DBUtils.getConnection()) {
+            PreparedStatement stm = conn.prepareStatement("select * from users where role=?");
+            stm.setString(1, role);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setMiddleName(rs.getString("middle_name"));
+                user.setRole(rs.getString("role"));
+                user.setId(rs.getLong("id"));
+                users.add(user);
+            }
+            return users;
+        }
+    }
+
+
+    public User getUserById(long id) throws SQLException {
+        try (Connection conn = DBUtils.getConnection()) {
+            PreparedStatement stm = conn.prepareStatement("select * from users where id=?");
+            stm.setLong(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setMiddleName(rs.getString("middle_name"));
+                user.setRole(rs.getString("role"));
+                user.setId(rs.getLong("id"));
+                return user;
+            }
+            return null;
+        }
+    }
+
+    public List<User> getAllUsers() throws SQLException {
         List<User> users = new ArrayList<>();
         try (Connection conn = DBUtils.getConnection()) {
             ResultSet rs = conn.prepareStatement("select * from users").executeQuery();
@@ -30,10 +70,8 @@ public class UserService {
                 user.setId(rs.getLong("id"));
                 users.add(user);
             }
-        } catch (SQLException e) {
-
+            return users;
         }
-        return users;
     }
 
     public User createUser(User user) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -52,8 +90,6 @@ public class UserService {
             stm.setString(7, user.getMiddleName());
             stm.executeUpdate();
             return user;
-        } catch (Exception e) {
-            throw e;
         }
     }
 

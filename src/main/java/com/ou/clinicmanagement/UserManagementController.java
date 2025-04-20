@@ -178,7 +178,9 @@ public class UserManagementController implements Initializable {
 
         tblView.getColumns().addAll(Arrays.asList(idCol, firstnameCol, lastnameCol, middleNameCol, usernameCol, roleCol, passwordCol));
         tblView.setItems(users);
-        users.addAll(userService.getAllUsers());
+        try {
+            users.addAll(userService.getAllUsers());
+        } catch (SQLException ignored) {}
     }
 
     private void onAddUser() {

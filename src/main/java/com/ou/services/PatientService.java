@@ -103,4 +103,23 @@ public class PatientService {
             return idCode;
         }
     }
+
+    public Patient getPatientByIdCode(String idCode) throws SQLException {
+        try (Connection connection = DBUtils.getConnection()) {
+            PreparedStatement stm = connection.prepareStatement("select * from patients where id_code = ?");
+            stm.setString(1, idCode);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Patient patient = new Patient();
+                patient.setId(rs.getInt("id"));
+                patient.setFirstName(rs.getString("first_name"));
+                patient.setMiddleName(rs.getString("middle_name"));
+                patient.setLastName(rs.getString("last_name"));
+                patient.setBirthday(rs.getDate("birthday").toLocalDate());
+                patient.setIdCode(rs.getString("id_code"));
+                return patient;
+            }
+            return null;
+        }
+    }
 }

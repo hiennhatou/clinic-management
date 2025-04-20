@@ -4,6 +4,7 @@ module com.ou.clinicmanagement {
     requires static lombok;
     requires java.sql;
     requires java.prefs;
+    requires org.controlsfx.controls;
 
     opens com.ou.clinicmanagement to javafx.fxml;
     exports com.ou.clinicmanagement;

@@ -11,9 +11,12 @@ import java.util.ResourceBundle;
 public class WelcomeStaffController implements Initializable {
     @FXML
     public Button toPatientManagement;
+    @FXML
+    public Button toTicketManagement;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         toPatientManagement.setOnAction(event -> App.moveScene("patient-management.fxml", true));
+        toTicketManagement.setOnAction(event -> App.moveScene("ticket-management.fxml", true));
     }
 }
