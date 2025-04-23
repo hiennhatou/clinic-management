@@ -8,10 +8,7 @@ import com.ou.utils.validation.UserValidation;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +77,7 @@ public class UserService {
             SecurityHash hash = SecurityHashUtils.hashPassword(user.getPassword());
             user.setPassword(hash.getHash());
             user.setSalt(hash.getSalt());
-            PreparedStatement stm = connection.prepareStatement("insert into users(username, password, salt, role, first_name, last_name, middle_name) values(?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement stm = connection.prepareStatement("insert into users(username, password, salt, role, first_name, last_name, middle_name) values(?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, user.getUsername());
             stm.setString(2, user.getPassword());
             stm.setString(3, user.getSalt());
@@ -89,6 +86,10 @@ public class UserService {
             stm.setString(6, user.getLastName());
             stm.setString(7, user.getMiddleName());
             stm.executeUpdate();
+            ResultSet rs = stm.getGeneratedKeys();
+            if (rs.next()) {
+                user.setId(rs.getLong(1));
+            }
             return user;
         }
     }

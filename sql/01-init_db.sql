@@ -43,11 +43,15 @@ create table tickets
 (
     id         int auto_increment
         primary key,
-    patient_id bigint                             not null,
-    created_on datetime default CURRENT_TIMESTAMP null,
-    updated_on datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    patient_id bigint                                                           not null,
+    doctor_id  bigint                                                           not null,
+    created_on datetime                               default CURRENT_TIMESTAMP null,
+    updated_on datetime                               default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    status     enum ('created', 'checked_in', 'done') default 'created'         not null,
     constraint FK_TICKET_PATIENT_ID
-        foreign key (patient_id) references patients (id)
+        foreign key (patient_id) references patients (id),
+    constraint FK_TICKET_DOCTOR_ID
+        foreign key (doctor_id) references users (id)
 );
 
 create table medical_records
@@ -68,7 +72,7 @@ create table medical_records
 
 create table ingredients
 (
-    id   bigint                       not null
+    id   bigint auto_increment        not null
         primary key,
     name varchar(255) charset utf8mb3 not null
 );
@@ -90,13 +94,13 @@ create table medicine_ingredient
     medicine_id   bigint      not null,
     ingredient_id bigint      not null,
     quantity      double      null,
-    unit          varchar(10) null,
+    unit          varchar(80) null,
     constraint UNIQUE_IDX_MEDICINE_ID_INGREDIENT_ID
         unique (medicine_id, ingredient_id),
     constraint FK_MEDICINE_INGREDIENT_INGREDIENT_ID
-        foreign key (ingredient_id) references ingredients (id),
+        foreign key (ingredient_id) references ingredients (id) on delete cascade,
     constraint FK_MEDICINE_INGREDIENT_MEDICINE_ID
-        foreign key (medicine_id) references medicines (id)
+        foreign key (medicine_id) references medicines (id) on delete cascade
 );
 
 create table allergic_ingredients
@@ -117,7 +121,7 @@ create table prescriptions
 (
     id          bigint auto_increment
         primary key,
-    ticket_id   int     not null,
+    ticket_id   int        not null,
     is_provided tinyint(1) not null,
     constraint FK_PRESCRIPTION_TICKET_ID
         foreign key (ticket_id) references tickets (id)
