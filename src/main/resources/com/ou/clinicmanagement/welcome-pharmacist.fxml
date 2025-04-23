@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<FlowPane alignment="CENTER" columnHalignment="CENTER" xmlns="http://javafx.com/javafx/17.0.12"
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.FlowPane?>
+<FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" xmlns="http://javafx.com/javafx/17.0.12"
           xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="com.ou.clinicmanagement.welcome.WelcomePharmacistController">
-    <Button mnemonicParsing="false" text="Đơn thuốc"/>
+    <Button mnemonicParsing="false" text="Cấp thuốc"/>
+    <Button fx:id="medicineManagement" mnemonicParsing="false" text="Quản lý thuốc"/>
 </FlowPane>

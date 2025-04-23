@@ -15,4 +15,5 @@ public class MedicineIngredient {
   private long ingredientId;
   private double quantity;
   private String unit;
+  private Ingredient ingredient;
 }

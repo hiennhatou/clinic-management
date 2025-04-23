@@ -81,12 +81,6 @@ public class TicketManagementController implements Initializable {
 
             @Override
             public User fromString(String string) {
-                try {
-                    int id = Integer.parseInt(string);
-                    return userService.getUserById(id);
-                } catch (SQLException | NumberFormatException ignored) {
-
-                }
                 return null;
             }
         });
@@ -124,11 +118,6 @@ public class TicketManagementController implements Initializable {
 
             @Override
             public Patient fromString(String string) {
-                try {
-                    return patientService.getPatientByIdCode(string);
-                } catch (SQLException | NumberFormatException ignored) {
-
-                }
                 return null;
             }
         });
