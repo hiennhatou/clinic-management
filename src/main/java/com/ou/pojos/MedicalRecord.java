@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,6 +17,6 @@ public class MedicalRecord {
   private String symptom;
   private String conclusion;
   private String treatmentInstruction;
-  private java.sql.Timestamp examinationDate;
+  private LocalDateTime examinationDate;
   private long ticketId;
 }

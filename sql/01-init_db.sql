@@ -62,8 +62,8 @@ create table medical_records
     symptom               text     not null,
     conclusion            text     not null,
     treatment_instruction text     null,
-    examination_date      datetime null,
-    ticket_id             int      null,
+    examination_date      datetime null default (current_timestamp),
+    ticket_id             int      not null unique,
     constraint FK_MEDICAL_RECORD_TICKET_ID
         foreign key (ticket_id) references tickets (id),
     constraint FK_MEDICAL_RECORD_PATIENT_ID
@@ -112,17 +112,17 @@ create table allergic_ingredients
     constraint UNIQUE_IDX_ALLERGIC_INGREDIENT_IDX_PATIENT_ID_INGREDIENT_ID
         unique (patient_id, ingredient_id),
     constraint FK_ALLERGIC_INGREDIENT_PATIENT_ID
-        foreign key (patient_id) references patients (id),
+        foreign key (patient_id) references patients (id) on delete cascade,
     constraint FK_ALLERGIC_INGREDIENT_INGREDIENTS
-        foreign key (ingredient_id) references ingredients (id)
+        foreign key (ingredient_id) references ingredients (id) on delete cascade
 );
 
 create table prescriptions
 (
-    id          bigint auto_increment
+    id        bigint auto_increment
         primary key,
-    ticket_id   int        not null,
-    is_provided tinyint(1) not null,
+    ticket_id int not null,
+    status    enum ('created', 'required', 'provided') default 'created',
     constraint FK_PRESCRIPTION_TICKET_ID
         foreign key (ticket_id) references tickets (id)
 );

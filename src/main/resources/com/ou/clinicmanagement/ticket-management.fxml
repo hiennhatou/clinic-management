@@ -29,8 +29,8 @@
                     <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
                <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Số CCCD:" GridPane.valignment="TOP" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bác sĩ tiếp nhận:" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*Số CCCD:" GridPane.valignment="TOP" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*Bác sĩ tiếp nhận:" GridPane.rowIndex="1" GridPane.valignment="TOP" />
             <AnchorPane GridPane.columnIndex="1" GridPane.valignment="CENTER">
                <children>
                   <SearchableComboBox fx:id="idCodeCB" layoutX="14.0" layoutY="1.0" prefWidth="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
