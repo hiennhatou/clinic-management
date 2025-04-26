@@ -19,6 +19,7 @@ import org.controlsfx.control.SearchableComboBox;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -89,6 +90,7 @@ public class TicketDetailController implements Initializable {
     MedicalRecordService medicalRecordService = new MedicalRecordService();
     PrescriptionService prescriptionService = new PrescriptionService();
     ObservableList<PrescriptionMedicine> prescriptionMedicines = FXCollections.observableArrayList();
+    ObservableList<MedicalRecord> medicalRecords = FXCollections.observableArrayList();
 
     @Setter
     private long id;
@@ -435,6 +437,49 @@ public class TicketDetailController implements Initializable {
         }
     }
 
+    private void onDeletePrescription() {
+        if (prescription == null) return;
+        try {
+            prescriptionService.removePrescription(prescription.getId());
+            prescription = null;
+            prescriptionStatus.set(null);
+            prescriptionTblView.getItems().clear();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /// Medical record history
+    private void intMedicalRecordHistoryTab() {
+        TableColumn<MedicalRecord, Long> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<MedicalRecord, LocalDateTime> dateCol = new TableColumn<>("Ngày khám");
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("examinationDate"));
+        dateCol.setCellFactory(t -> new TableCell<>(){
+            @Override
+            protected void updateItem(LocalDateTime item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(item.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+                }
+            }
+        });
+        TableColumn<MedicalRecord, String> symptomCol = new TableColumn<>("Triệu chứng");
+        symptomCol.setCellValueFactory(new PropertyValueFactory<>("symptom"));
+        TableColumn<MedicalRecord, String> conclusionCol = new TableColumn<>("Kết luận");
+        conclusionCol.setCellValueFactory(new PropertyValueFactory<>("conclusion"));
+        TableColumn<MedicalRecord, String> treatmentInstructionCol = new TableColumn<>("Phương pháp điều trị");
+        treatmentInstructionCol.setCellValueFactory(new PropertyValueFactory<>("treatmentInstruction"));
+
+        medicalRecordHistoryTblView.getColumns().addAll(Arrays.asList(idCol, dateCol, symptomCol, conclusionCol, treatmentInstructionCol));
+        medicalRecordHistoryTblView.setItems(medicalRecords);
+        try {
+            medicalRecords.setAll(medicalRecordService.getMedicalRecordByPatientId(ticket.getPatientId(), id));
+        } catch (SQLException e) {}
+    }
+
     public class TicketStatusListener implements ChangeListener<String> {
         @Override
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -451,6 +496,7 @@ public class TicketDetailController implements Initializable {
                 initAllergicTab();
                 initMedicalRecordTab();
                 initPrescriptionTab();
+                intMedicalRecordHistoryTab();
             }
             if (newValue.equals("created")) {
                 commitStatusBtn.setText("Tiếp nhận");
@@ -458,18 +504,6 @@ public class TicketDetailController implements Initializable {
                 commitStatusBtn.setText("Đã hoàn thành");
             }
 
-        }
-    }
-
-    private void onDeletePrescription() {
-        if (prescription == null) return;
-        try {
-            prescriptionService.removePrescription(prescription.getId());
-            prescription = null;
-            prescriptionStatus.set(null);
-            prescriptionTblView.getItems().clear();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
