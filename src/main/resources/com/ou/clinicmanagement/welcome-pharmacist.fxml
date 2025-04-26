@@ -5,6 +5,6 @@
 <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" xmlns="http://javafx.com/javafx/17.0.12"
           xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="com.ou.clinicmanagement.welcome.WelcomePharmacistController">
-    <Button mnemonicParsing="false" text="Cấp thuốc"/>
+    <Button fx:id="provideMedicineBtn" mnemonicParsing="false" text="Cấp thuốc"/>
     <Button fx:id="medicineManagement" mnemonicParsing="false" text="Quản lý thuốc"/>
 </FlowPane>
