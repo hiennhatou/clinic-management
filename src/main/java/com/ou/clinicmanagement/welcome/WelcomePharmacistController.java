@@ -11,9 +11,12 @@ import java.util.ResourceBundle;
 public class WelcomePharmacistController implements Initializable {
     @FXML
     public Button medicineManagement;
+    @FXML
+    public Button provideMedicineBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         medicineManagement.setOnAction(event -> App.moveScene("medicine-management.fxml", true));
+        provideMedicineBtn.setOnAction(event -> App.moveScene("provide-medicine.fxml", true));
     }
 }

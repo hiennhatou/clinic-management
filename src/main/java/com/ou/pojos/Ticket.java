@@ -21,6 +21,7 @@ public class Ticket {
 
   private Patient patient;
   private User doctor;
+  private MedicalRecord medicalRecord;
 
   public static String getReadableStatus(String status) {
     return switch (status) {

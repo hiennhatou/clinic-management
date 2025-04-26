@@ -18,6 +18,7 @@ public class Prescription {
     private String status = "created";
 
     private List<PrescriptionMedicine> medicines = new ArrayList<>();
+    private Ticket ticket;
 
     public static String getStatusReadable(String status) {
         return switch (status) {
