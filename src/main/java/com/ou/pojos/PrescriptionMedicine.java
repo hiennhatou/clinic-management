@@ -15,4 +15,6 @@ public class PrescriptionMedicine {
   private long medicineId;
   private double quantity;
   private String instrument;
+
+  private Medicine medicine;
 }

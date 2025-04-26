@@ -4,5 +4,5 @@
 <?import javafx.scene.layout.*?>
 
 <FlowPane alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.clinicmanagement.welcome.WelcomeDoctorController">
-    <Button text="Phiếu khám" />
+    <Button fx:id="ticketBtn" text="Phiếu khám" />
 </FlowPane>

@@ -13,4 +13,7 @@ public class AllergicIngredient {
   private long id;
   private long patientId;
   private long ingredientId;
+
+  private Patient patient;
+  private Ingredient ingredient;
 }

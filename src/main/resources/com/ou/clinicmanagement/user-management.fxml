@@ -12,12 +12,12 @@
             <ChoiceBox fx:id="roleChoiceBox" layoutX="302.0" layoutY="122.0" prefHeight="26.0" prefWidth="139.0" />
             <PasswordField fx:id="passwordInput" layoutX="511.0" layoutY="122.0" prefHeight="26.0" prefWidth="154.0" />
             <Button fx:id="addUserBtn" layoutX="5.0" layoutY="157.0" mnemonicParsing="false" text="Thêm tài khoản" />
-            <Label layoutX="5.0" layoutY="66.0" text="Tên" />
-            <Label layoutX="5.0" layoutY="126.0" text="Tên đăng nhập" />
+            <Label layoutX="5.0" layoutY="66.0" text="*Tên" />
+            <Label layoutX="5.0" layoutY="126.0" text="*Tên đăng nhập" />
             <Label layoutX="253.0" layoutY="66.0" text="Họ" />
-            <Label layoutX="253.0" layoutY="126.0" text="Vai trò" />
+            <Label layoutX="253.0" layoutY="126.0" text="*Vai trò" />
             <Label layoutX="448.0" layoutY="66.0" text="Tên đệm" />
-            <Label layoutX="448.0" layoutY="126.0" text="Mật khẩu" />
+            <Label layoutX="448.0" layoutY="126.0" text="*Mật khẩu" />
       <Button fx:id="deleteBtn" layoutX="518.0" layoutY="183.0" mnemonicParsing="false" text="Xóa tài khoản đã chọn" />
       <Button fx:id="backToMainMenu" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Quay lại màn hình chính" />
       </Pane>

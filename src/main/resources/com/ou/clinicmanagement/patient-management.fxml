@@ -35,7 +35,7 @@
                 </padding>
             </HBox>
             <HBox prefHeight="60.0" prefWidth="87.0" GridPane.rowIndex="1">
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Họ: " />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*Họ: " />
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                 <TextField fx:id="lastNameTF" />
@@ -47,19 +47,19 @@
                 <TextField fx:id="middleNameTF" />
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tên:" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*Tên:" />
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <TextField fx:id="firstNameTF" />
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CCCD:" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*CCCD:" />
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                 <TextField fx:id="idCodeTF" />
             </HBox>
             <HBox GridPane.rowIndex="3">
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày sinh:" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*Ngày sinh:" />
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                 <DatePicker fx:id="birthdayDatePicker" />

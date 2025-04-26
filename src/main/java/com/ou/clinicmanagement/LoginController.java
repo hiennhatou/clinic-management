@@ -41,7 +41,6 @@ public class LoginController implements Initializable {
     @SneakyThrows
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        App.setTitle("Đăng nhập");
         loginbtn.setOnAction(this::onLogin);
     }
 
