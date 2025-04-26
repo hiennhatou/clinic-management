@@ -13,9 +13,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Prescription {
-  private long id;
-  private long ticketId;
-  private String status = "created";
+    private long id;
+    private long ticketId;
+    private String status = "created";
 
-  private List<PrescriptionMedicine> medicines = new ArrayList<>();
+    private List<PrescriptionMedicine> medicines = new ArrayList<>();
+
+    public static String getStatusReadable(String status) {
+        return switch (status) {
+            case "created" -> "Đang chính sửa đơn thuốc";
+            case "required" -> "Đang yêu cầu đơn thuốc";
+            case "provided" -> "Đã cung cấp";
+            default -> "Không có đơn thuốc";
+        };
+    }
 }

@@ -62,7 +62,7 @@ public class PrescriptionService {
 
     public String updatePrescriptionStatus(String status, long id) throws SQLException {
         try (Connection conn = DBUtils.getConnection()) {
-            PreparedStatement stm = conn.prepareStatement("update prescriptions set status = ? where p_id = ?");
+            PreparedStatement stm = conn.prepareStatement("update prescriptions set status = ? where id = ?");
             stm.setString(1, status);
             stm.setLong(2, id);
             stm.executeUpdate();
@@ -72,7 +72,7 @@ public class PrescriptionService {
 
     public PrescriptionMedicine addPrescriptionMedicine(PrescriptionMedicine prescriptionMedicine) throws SQLException {
         try (Connection conn = DBUtils.getConnection()) {
-            PreparedStatement stm = conn.prepareStatement("insert into prescription_medicine (prescription_id, medicine_id, quantity, instrumment) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stm = conn.prepareStatement("insert into prescription_medicine (prescription_id, medicine_id, quantity, instrument) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stm.setLong(1, prescriptionMedicine.getPrescriptionId());
             stm.setLong(2, prescriptionMedicine.getMedicineId());
             stm.setDouble(3, prescriptionMedicine.getQuantity());
@@ -95,16 +95,11 @@ public class PrescriptionService {
         }
     }
 
-    public PrescriptionMedicine updatePrescriptionMedicine(PrescriptionMedicine prescriptionMedicine) throws SQLException {
+    public void removePrescription(long id) throws SQLException {
         try (Connection conn = DBUtils.getConnection()) {
-            PreparedStatement stm = conn.prepareStatement("update prescription_medicine set medicine_id = ?, prescription_id = ?, quantity = ?, instrument = ? where p_id = ?");
-            stm.setLong(1, prescriptionMedicine.getMedicineId());
-            stm.setLong(2, prescriptionMedicine.getPrescriptionId());
-            stm.setDouble(3, prescriptionMedicine.getQuantity());
-            stm.setString(4, prescriptionMedicine.getInstrument());
-            stm.setLong(5, prescriptionMedicine.getId());
+            PreparedStatement stm = conn.prepareStatement("delete from prescriptions where id = ?");
+            stm.setLong(1, id);
             stm.executeUpdate();
-            return prescriptionMedicine;
         }
     }
 }
