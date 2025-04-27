@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,8 +14,8 @@ import lombok.Setter;
 public class Appointment {
   private long id;
   private long patientId;
-  private String periodTime;
-  private java.sql.Date appointmentDate;
-  private String symptom;
-  private long isCheckin;
+  private LocalDate appointmentDate;
+  private boolean isCheckin = false;
+
+  private Patient patient;
 }

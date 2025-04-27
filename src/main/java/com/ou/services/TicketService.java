@@ -7,27 +7,66 @@ import com.ou.pojos.User;
 import com.ou.utils.exceptions.ValidatorException;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TicketService {
     public Ticket createTicket(long doctorId, long patientId) throws SQLException {
+        return createTicket(doctorId, patientId, 0);
+    }
+
+    public Ticket createTicket(long doctorId, long patientId, long appointmentId) throws SQLException {
+        LocalDateTime now = LocalDateTime.now();
+        if (now.getHour() > 16 || (now.getHour() == 16 && now.getMinute() > 15))
+            throw new ValidatorException("Đã quá giờ tiếp nhận bệnh nhân", null);
         try (Connection conn = DBUtils.getConnection()) {
             conn.setAutoCommit(false);
-            PreparedStatement stm1 = conn.prepareStatement("select * from tickets where patient_id = ? and status in ('created', 'checked_in')");
-            stm1.setLong(1, patientId);
-            ResultSet rs = stm1.executeQuery();
-            if (rs.next()) {
-                String message = String.format("Bệnh nhân đang được khám (ID: %d)", rs.getLong("id"));
-                conn.rollback();
-                throw new ValidatorException(message, null);
+
+            if (appointmentId > 0) {
+                PreparedStatement checkAppointmentTime = conn.prepareStatement("SELECT COUNT(*) FROM appointments WHERE id = ? AND appointment_date = ?");
+                checkAppointmentTime.setLong(1, appointmentId);
+                checkAppointmentTime.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+                checkAppointmentTime.executeQuery();
+                ResultSet checkAppointmentTimeRS = checkAppointmentTime.getResultSet();
+                if (checkAppointmentTimeRS.next() && checkAppointmentTimeRS.getLong(1) < 0) {
+                    conn.rollback();
+                    throw new ValidatorException("Lịch hẹn không phù hợp", null);
+                }
             }
-            PreparedStatement stm = conn.prepareStatement("insert into tickets(doctor_id, patient_id) values(?,?)", Statement.RETURN_GENERATED_KEYS);
-            stm.setLong(1, doctorId);
-            stm.setLong(2, patientId);
-            stm.executeUpdate();
+
+            PreparedStatement checkAvailableDoctorStm = conn.prepareStatement("select count(*) from tickets where doctor_id=? and created_on >=? and created_on < ?");
+            checkAvailableDoctorStm.setLong(1, doctorId);
+            checkAvailableDoctorStm.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+            checkAvailableDoctorStm.setDate(3, java.sql.Date.valueOf(LocalDate.now().plusDays(1)));
+            checkAvailableDoctorStm.executeQuery();
+            ResultSet checkAvailableDoctorRs = checkAvailableDoctorStm.getResultSet();
+            if (checkAvailableDoctorRs.next() && checkAvailableDoctorRs.getInt(1) >= 20) {
+                conn.rollback();
+                throw new ValidatorException("Bác sĩ đã tiếp nhận quá số phiên khám quy định", null);
+            }
+
+            PreparedStatement checkAvailablePatient = conn.prepareStatement("select count(*) from tickets where patient_id=? and status in ('created', 'checked_in')");
+            checkAvailablePatient.setLong(1, patientId);
+            checkAvailablePatient.executeQuery();
+            ResultSet checkAvailablePatientRs = checkAvailablePatient.getResultSet();
+            if (checkAvailablePatientRs.next() && checkAvailablePatientRs.getInt(1) >= 1) {
+                conn.rollback();
+                throw new ValidatorException("Bệnh nhân đã tồn tại phiên khám", null);
+            }
+
+            PreparedStatement insetStm = conn.prepareStatement("insert into tickets (patient_id, doctor_id, appointment_id) values (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            insetStm.setLong(1, patientId);
+            insetStm.setLong(2, doctorId);
+            if (appointmentId <= 0)
+                insetStm.setNull(3, Types.BIGINT);
+            else
+                insetStm.setLong(3, appointmentId);
+            insetStm.executeUpdate();
             conn.commit();
-            ResultSet keys = stm.getGeneratedKeys();
+
+            ResultSet keys = insetStm.getGeneratedKeys();
             if (keys.next()) {
                 Ticket ticket = new Ticket();
                 ticket.setDoctorId(doctorId);

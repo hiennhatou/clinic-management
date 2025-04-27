@@ -5,6 +5,7 @@ module com.ou.clinicmanagement {
     requires java.sql;
     requires java.prefs;
     requires org.controlsfx.controls;
+    requires java.desktop;
 
     opens com.ou.clinicmanagement to javafx.fxml;
     exports com.ou.clinicmanagement;
