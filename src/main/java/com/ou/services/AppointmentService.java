@@ -89,7 +89,7 @@ public class AppointmentService {
                 PreparedStatement checkTicketStm = conn.prepareStatement("select count(*) from tickets where appointment_id = ?");
                 checkTicketStm.setLong(1, appointmentId);
                 ResultSet rs = checkTicketStm.executeQuery();
-                if (!rs.next() && (rs.getLong(1) <= 0 && status)) {
+                if (!rs.next() || rs.getLong(1) <= 0) {
                     conn.rollback();
                     throw new ValidatorException("Phiên khám của lịch hẹn chưa đuược tạo", null);
                 }
